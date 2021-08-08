@@ -30,11 +30,11 @@
 <script>
     document.getElementById("form").onsubmit = async (e) => {
         e.preventDefault()
-        let url = "https://us-central1-fresh-heuristic-134523.cloudfunctions.net/podtogether-post-generator?"
+        let url = "https://us-central1-fresh-heuristic-134523.cloudfunctions.net/podtogether-post-generator"
 //         let url = "http://localhost:8080"
         let markup = document.getElementById("markup")
         try {
-            markup.textContent = "Loading..."
+            markup.value = "Loading..."
             let dwContent = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -42,16 +42,16 @@
                 },
                 body: JSON.stringify({
                     text_url: document.getElementById("text_url").value,
-                    text_source: document.getElementById("text_source").textContent,
+                    text_source: document.getElementById("text_source").value,
                     audio_url: document.getElementById("audio_url").value,
                     writers: document.getElementById("writers").value,
                     performers: document.getElementById("performers").value
                 })
             })
-            markup.textContent = await dwContent.text()
+            markup.value = await dwContent.text()
         } catch (err) {
             alert(err)
-            markup.textContent = ""
+            markup.value = ""
         }
     }
 </script>
